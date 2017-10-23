@@ -17,7 +17,6 @@ def main():
             for image in images:
                 file_name = extract_filename(image)
                 print(f' - {file_name}')
-    #print(f'Hello {options.person}')
 
 def get_image_uris_from_line(line):
     pattern_to_find = r'''<img.*?src="(.*?)"'''
