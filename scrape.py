@@ -11,15 +11,17 @@ def main():
     p.add_option('--url', '-u', default="https://www.bikerumor.com")
     p.add_option('--directory', '-d', default="downloads")
     options, arguments = p.parse_args()
-    pattern_to_find = r'''<img.*?src="(.*?)"'''
     with urlopen(options.url) as response:
         for line in response:
-            line = line.decode('utf-8')
-            images = re.findall(pattern_to_find,line)
+            images = get_image_uris_from_line(line.decode('utf-8'))
             for image in images:
                 file_name = extract_filename(image)
                 print(f' - {file_name}')
     #print(f'Hello {options.person}')
+
+def get_image_uris_from_line(line):
+    pattern_to_find = r'''<img.*?src="(.*?)"'''
+    return re.findall(pattern_to_find,line)
 
 def extract_filename(uri):
     parsed = urlparse(uri)
