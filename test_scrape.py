@@ -34,6 +34,9 @@ class TestScrapeMethods(unittest.TestCase):
         scrape.create_save_directory(self.test_dirname1)
         self.assertTrue(os.path.exists(self.test_dirname1))
 
+    def test_create_save_directory_exists(self):
+        scrape.create_save_directory(self.test_dirname_exist)
+        self.assertTrue(os.path.exists(self.test_dirname_exist))
 
 if __name__ == '__main__':
     unittest.main()
