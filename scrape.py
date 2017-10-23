@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8  -*-
 
-from urllib.request import urlopen
+from urllib.request import urlopen,urlretrieve
 import optparse
 import re
 from urllib.parse import urlparse
@@ -13,12 +13,14 @@ def main():
     p.add_option('--url', '-u', default="https://www.bikerumor.com")
     p.add_option('--directory', '-d', default="downloads")
     options, arguments = p.parse_args()
+
+    create_save_directory(options.directory)
     with urlopen(options.url) as response:
         for line in response:
             images = get_image_uris_from_line(line.decode('utf-8'))
             for image in images:
-                file_name = extract_filename(image)
-                print(f' - {file_name}')
+                file_name = f"{options.directory}/{extract_filename(image)}"
+                urlretrieve(image,file_name)
 
 def create_save_directory(dir):
     if os.path.exists(dir):

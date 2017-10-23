@@ -35,6 +35,10 @@ class TestScrapeMethods(unittest.TestCase):
         self.assertTrue(os.path.exists(self.test_dirname1))
 
     def test_create_save_directory_exists(self):
+        """
+        Test that create_save_directory works if there is a left over dirty
+        directory.
+        """
         scrape.create_save_directory(self.test_dirname_exist)
         self.assertTrue(os.path.exists(self.test_dirname_exist))
 
