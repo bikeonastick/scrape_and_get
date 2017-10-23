@@ -21,6 +21,8 @@ def main():
                 print(f' - {file_name}')
 
 def create_save_directory(dir):
+    if os.path.exists(dir):
+        rmtree(dir, True)
     os.mkdir(dir)
 
 def get_image_uris_from_line(line):
