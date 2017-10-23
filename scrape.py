@@ -5,6 +5,8 @@ from urllib.request import urlopen
 import optparse
 import re
 from urllib.parse import urlparse
+import os
+from shutil import rmtree
  
 def main():
     p = optparse.OptionParser()
@@ -17,6 +19,9 @@ def main():
             for image in images:
                 file_name = extract_filename(image)
                 print(f' - {file_name}')
+
+def create_save_directory(dir):
+    os.mkdir(dir)
 
 def get_image_uris_from_line(line):
     pattern_to_find = r'''<img.*?src="(.*?)"'''
